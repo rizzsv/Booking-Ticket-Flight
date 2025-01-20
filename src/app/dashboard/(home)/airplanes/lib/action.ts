@@ -3,10 +3,11 @@
 import { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
 import { airplaneFormSchema } from "./validation";
 import { redirect } from "next/navigation";
-import { uploadFile } from "@/lib/supabase";
-import { error } from "console";
+import { deleteFile, uploadFile } from "@/lib/supabase";
+import { error, log } from "console";
 import prisma from "../../../../../../lib/prisma";
 import { revalidatePath } from "next/cache";
+import { console } from "inspector";
 
 export async function getAirplaneById(id: string) {
     try {
@@ -141,3 +142,39 @@ export async function updateAirplane(
     revalidatePath('/dashboard/airplanes')
     redirect('/dashboard/airplanes')
 }
+
+export async function deleteAirplane(id: string): Promise<ActionResult | undefined> {
+    const data = await prisma.airplane.findFirst({where: {id: id}})
+
+    if(!data) {
+        return {
+            errorTitle: 'Data not found',
+            errorDesc: []
+        }
+    }
+
+    const deletedFile = await deleteFile(data?.image)
+
+    if(deletedFile instanceof Error) {
+        return {
+            errorTitle: 'Failed to delete file',
+            errorDesc: ['Terjadi masalah pada koneksi, silahkan coba lagi']
+        }
+    }
+
+    try {
+        await prisma.airplane.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch (error) {   
+        console.log('Error in deleteAirplane', error)
+
+        return {
+            errorTitle: 'Failed to delete data',
+            errorDesc: ['Terjadi masalah pada koneksi, silahkan coba lagi']
+        }
+    }
+    revalidatePath("/dashboard/airplanes")
+} 
