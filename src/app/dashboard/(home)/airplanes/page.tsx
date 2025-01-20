@@ -5,6 +5,11 @@ import Link from 'next/link'
 import React from 'react'
 import { columns } from './components/columns-table'
 import { getAirplanes } from './lib/data'
+import { Metadata } from 'next'
+
+export const metada: Metadata = {
+    title: 'Dashboard | Airplanes'
+}
 
 export default async function AirplanesPage() {
     const planes = await getAirplanes()
