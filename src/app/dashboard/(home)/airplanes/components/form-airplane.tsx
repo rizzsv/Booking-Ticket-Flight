@@ -5,12 +5,15 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
 import React, {type FC } from 'react'
-import { saveAirplane } from '../lib/action'
+import { saveAirplane, updateAirplane } from '../lib/action'
 import { useFormState } from 'react-dom'
+import type { Airplane } from '@prisma/client'
 
-// interface formAirplaneProps {
+interface formAirplaneProps {
 
-// }
+    type?: "ADD" | "EDIT"
+    defaultValues? : Airplane | null ;
+ }
 
 const initialFormState: ActionResult = {
     errorTitle: null,
@@ -25,8 +28,11 @@ const SubmitButton = () => {
     )
 }
 
-const FormAirplane: FC = () => {
-    const [state, formAction] = useFormState(saveAirplane, initialFormState)
+const FormAirplane: FC<formAirplaneProps> = ({type, defaultValues}) => {
+
+    const updateAirplaneWithId = (_state: ActionResult, formData: FormData) => updateAirplane(null, defaultValues?.id!!, formData)
+
+    const [state, formAction] = useFormState(type === "ADD" ? saveAirplane: updateAirplaneWithId, initialFormState)
 
   return (
     <form action={formAction} className='w-[40%] space-y-4'>
@@ -49,6 +55,7 @@ const FormAirplane: FC = () => {
              placeholder='kode pesawat...' 
              name='code' 
              id='code' 
+             defaultValue={defaultValues?.code}
              required></Input>
         </div>
 
@@ -60,6 +67,7 @@ const FormAirplane: FC = () => {
             placeholder='Nama pesawat...' 
             name='name' 
             id='name' 
+            defaultValue={defaultValues?.name}
             required></Input>
         </div>
 
@@ -74,7 +82,7 @@ const FormAirplane: FC = () => {
              id='image' 
              required></Input>
         </div>
-        <SubmitButton />
+        <SubmitButton/>
     </form>
   )
 }
