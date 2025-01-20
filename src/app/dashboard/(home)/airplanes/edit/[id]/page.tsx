@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button';
-import { Link, Plus } from 'lucide-react';
 import React, { type FC } from 'react'
 import FormAirplane from '../../components/form-airplane';
 import { getAirplaneById } from '../../lib/action';
@@ -13,10 +11,10 @@ interface EditAirplanePageProps {
     params: Params
 }
  
-const EditAirplanePage: FC<EditAirplanePageProps> = async ({ params }) => {
-    // console.log(params.id); '$%7Bplane.id%7D'
-    const data = await getAirplaneById(params.id)
+const EditAirplanePage: FC<EditAirplanePageProps> = async ({params}) => {
 
+    console.log(params.id)
+    const data = await getAirplaneById(params.id)
     console.log(data)
     return (
         <div>

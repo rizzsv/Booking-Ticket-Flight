@@ -3,16 +3,16 @@
 import type { ActionResult } from '@/app/dashboard/(auth)/signin/form/actions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@radix-ui/react-label'
+import { Label } from "@/components/ui/label"
 import React, {type FC } from 'react'
 import { saveAirplane, updateAirplane } from '../lib/action'
-import { useFormState } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom'
 import type { Airplane } from '@prisma/client'
 
 interface formAirplaneProps {
 
     type?: "ADD" | "EDIT"
-    defaultValues? : Airplane | null ;
+    defaultValues? : Airplane | null
  }
 
 const initialFormState: ActionResult = {
@@ -21,16 +21,15 @@ const initialFormState: ActionResult = {
 }
 
 const SubmitButton = () => {
-    const {pending} = useFormState()
+    const {pending} = useFormStatus()
 
     return (
         <Button disabled={pending} className='w-full'>Submit</Button>
     )
 }
 
-const FormAirplane: FC<formAirplaneProps> = ({type, defaultValues}) => {
-
-    const updateAirplaneWithId = (_state: ActionResult, formData: FormData) => updateAirplane(null, defaultValues?.id!!, formData)
+const FormAirplane: FC<formAirplaneProps> = ({type, defaultValues}) => 
+    {const updateAirplaneWithId = (_state: ActionResult, formData: FormData) => updateAirplane(null, defaultValues?.id!!, formData)
 
     const [state, formAction] = useFormState(type === "ADD" ? saveAirplane: updateAirplaneWithId, initialFormState)
 
@@ -82,7 +81,7 @@ const FormAirplane: FC<formAirplaneProps> = ({type, defaultValues}) => {
              id='image' 
              required></Input>
         </div>
-        <SubmitButton/>
+        <SubmitButton />
     </form>
   )
 }

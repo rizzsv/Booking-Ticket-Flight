@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/button';
-import { Link, Plus } from 'lucide-react';
 import React, { type FC } from 'react'
 import FormAirplane from '../components/form-airplane';
 
@@ -16,7 +14,7 @@ const CreateAirplanePage: FC = () => {
             </div>
         </div>
 
-        <FormAirplane />
+        <FormAirplane type='ADD'/>
         </div>
     )
 }

@@ -8,23 +8,24 @@ import { error } from "console";
 import prisma from "../../../../../../lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function getAirplaneById (id: string) {
+export async function getAirplaneById(id: string) {
     try {
         const data = await prisma.airplane.findFirst({
             where: {
-                id: id,
-            },
-        });
+                id: id
+            }
+        })
 
         return data;
     } catch (error) {
-        console.log(error)
-        return null
+        console.log('Error in getAirplaneById', error)
+
+        return null;
     }
 }
 
 
-export async function saveAirplane(prevState: any, formData: FormData): Promise<ActionResult> {
+export async function saveAirplane(prevState: unknown, formData: FormData): Promise<ActionResult> {
     const values = airplaneFormSchema.safeParse({
         name: formData.get("name"),
         image: formData.get("image"),
