@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import React, {type FC} from "react";
 import FormFlight from "../components/form-flight";
 import { getAirplanes } from "../../airplanes/lib/data";
@@ -23,7 +23,7 @@ const CreateFlightPage: FC = async () => {
                 Tambah Data Flight
             </div>
         </div>
-        <FormFlight airplanes={airplanes}/>
+        <FormFlight type="ADD" airplanes={airplanes}/>
         </div>
     )
 }

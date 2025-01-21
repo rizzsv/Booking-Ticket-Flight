@@ -11,13 +11,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import SubmitButtonForm from "../../components/submit-form-button";
-import type { Airplane } from "@prisma/client";
+import type { Airplane, Flight } from "@prisma/client";
 import { saveFlight } from "../lib/action";
 import { useFormState } from "react-dom";
 import type { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
+import { dateFormat } from "@/lib/utils";
+import { updateFlight } from "../lib/action";
 
 interface FormFlightProps {
   airplanes: Airplane[];
+  type? : "ADD" | "EDIT"
+  defaultValues?: Flight | null
 }
 
 const initialFormState: ActionResult = {
@@ -25,8 +29,11 @@ const initialFormState: ActionResult = {
   errorDesc: [],
 };
 
-export default function FormFlight({ airplanes }: FormFlightProps) {
-  const [state, formAction] = useFormState(saveFlight, initialFormState);
+export default function FormFlight({ airplanes, defaultValues, type  }: FormFlightProps) {
+
+  const updateFlightWithId = async (_state: ActionResult, formData: FormData) => updateFlight(null, defaultValues?.id, formData)
+
+  const [state, formAction] = useFormState(type === "ADD" ? saveFlight : updateFlightWithId, initialFormState);
 
   return (
     <form action={formAction} className="space-y-6">
@@ -44,7 +51,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
 
       <div className="space-y-2">
         <Label htmlFor="planeId">Pilih Pesawat</Label>
-        <Select name="planeId">
+        <Select name="planeId" defaultValue={defaultValues?.planeId}>
           <SelectTrigger id="planeId">
             <SelectValue placeholder="Pilih Pesawat" />
           </SelectTrigger>
@@ -66,6 +73,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
           id="price"
           type="number"
           min={0}
+          defaultValue={defaultValues?.price}
           required
         />
         <span className="text-xs text-gray-900">
@@ -81,6 +89,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             placeholder="Kota Keberangkatan..."
             name="departureCity"
             id="departureCity"
+            defaultValue={defaultValues?.departureCity}
             required
           />
         </div>
@@ -93,6 +102,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             name="departureDate"
             id="departureDate"
             className="block"
+            defaultValue={dateFormat(defaultValues?.departureDate, "YYYY-MM-DDTHH:mm")}
             required
           />
         </div>
@@ -103,6 +113,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             placeholder="Kode Kota..."
             name="departureCityCode"
             id="departureCityCode"
+            defaultValue={defaultValues?.departureCityCode}
             required
           />
         </div>
@@ -115,6 +126,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             placeholder="Kota Tujuan..."
             name="destinationCity"
             id="destinationCity"
+            defaultValue={defaultValues?.destinationCity}
             required
           />
         </div>
@@ -127,6 +139,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             name="arrivalDate"
             id="arrivalDate"
             className="block"
+            defaultValue={dateFormat(defaultValues?.arrivalDate, "YYYY-MM-DDTHH:mm")}
             required
           />
         </div>
@@ -137,6 +150,7 @@ export default function FormFlight({ airplanes }: FormFlightProps) {
             placeholder="Kode Kota..."
             name="destinationCityCode"
             id="destinationCityCode"
+            defaultValue={defaultValues?.departureCityCode}
             required
           />
         </div>
