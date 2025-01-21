@@ -17,6 +17,8 @@ export const metada: Metadata = {
 
 const FlightPage: FC = async () => {
 
+  
+
   const data = await getFlights()
 
   return (

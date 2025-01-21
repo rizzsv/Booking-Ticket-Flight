@@ -4,6 +4,8 @@ import FormAirplane from '../components/form-airplane';
 // interface CreateAirplanePageProps {
 
 // }
+
+export const 
  
 const CreateAirplanePage: FC = () => {
     return (

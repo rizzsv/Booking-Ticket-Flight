@@ -1,13 +1,27 @@
+import { Metadata } from "next";
 import React, {type FC} from "react";
+import FormFlight from "../components/form-flight";
+import { getAirplanes } from "../../airplanes/lib/data";
 
 // interface CreateFlightPageProps {
 
 // }
 
-const CreateFlightPage: FC = () => {
+export const metadata : Metadata = {
+    title: 'Dashboard | create data flight'
+}
+
+const CreateFlightPage: FC = async () => {
+    const airplanes = await getAirplanes()
+
     return (
         <div>
-            CreateFlightPage
+          <div className='flex flex-row items-center justify-between'>
+            <div className='my-5 text-2xl font-bold'>
+                Tambah Data Flight
+            </div>
+        </div>
+        <FormFlight airplanes={airplanes}/>
         </div>
     )
 }
