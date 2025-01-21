@@ -12,17 +12,36 @@ import {
 } from "@/components/ui/select";
 import SubmitButtonForm from "../../components/submit-form-button";
 import type { Airplane } from "@prisma/client";
-
+import { saveFlight } from "../lib/action";
+import { useFormState } from "react-dom";
+import type { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
 
 interface FormFlightProps {
-    airplanes: Airplane[]
+  airplanes: Airplane[];
 }
 
+const initialFormState: ActionResult = {
+  errorTitle: null,
+  errorDesc: [],
+};
 
+export default function FormFlight({ airplanes }: FormFlightProps) {
+  const [state, formAction] = useFormState(saveFlight, initialFormState);
 
-export default function FormFlight({airplanes}: FormFlightProps) {
   return (
-    <form className="space-y-6">
+    <form action={formAction} className="space-y-6">
+      {state?.errorTitle !== null && (
+        <div className="my-7 bg-red-500 p-4 rounded-lg text-white">
+          <div className="font-bold mb-4">{state.errorTitle}</div>
+
+          <ul className="list-disc list-inside">
+            {state.errorDesc?.map((value, index) => (
+              <li key={index + value}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="space-y-2">
         <Label htmlFor="planeId">Pilih Pesawat</Label>
         <Select name="planeId">
@@ -31,7 +50,9 @@ export default function FormFlight({airplanes}: FormFlightProps) {
           </SelectTrigger>
           <SelectContent>
             {airplanes.map((value) => (
-                <SelectItem key={value.id} value={value.id}>{value.name}</SelectItem>
+              <SelectItem key={value.id} value={value.id}>
+                {value.name}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -54,71 +75,71 @@ export default function FormFlight({airplanes}: FormFlightProps) {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-      <div className="space-y-2">
-        <Label htmlFor="departureCity">Kota Keberangkatan</Label>
-        <Input
-          placeholder="Kota Keberangkatan..."
-          name="departureCity"
-          id="departureCity"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="departureCity">Kota Keberangkatan</Label>
+          <Input
+            placeholder="Kota Keberangkatan..."
+            name="departureCity"
+            id="departureCity"
+            required
+          />
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="departureDate">Tanggal Keberangkatan</Label>
-        <Input
-          type="datetime-local"
-          placeholder="Tanggal Keberangkatan..."
-          name="departureDate"
-          id="departureDate"
-          className="block"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="departureDate">Tanggal Keberangkatan</Label>
+          <Input
+            type="datetime-local"
+            placeholder="Tanggal Keberangkatan..."
+            name="departureDate"
+            id="departureDate"
+            className="block"
+            required
+          />
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="departureCityCode">Kode Kota</Label>
-        <Input
-          placeholder="Kode Kota..."
-          name="departureCityCode"
-          id="departureCityCode"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="departureCityCode">Kode Kota</Label>
+          <Input
+            placeholder="Kode Kota..."
+            name="departureCityCode"
+            id="departureCityCode"
+            required
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-      <div className="space-y-2">
-        <Label htmlFor="destinationCity">Kota Tujuan</Label>
-        <Input
-          placeholder="Kota Tujuan..."
-          name="destinationCity"
-          id="destinationCity"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="destinationCity">Kota Tujuan</Label>
+          <Input
+            placeholder="Kota Tujuan..."
+            name="destinationCity"
+            id="destinationCity"
+            required
+          />
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="arrivalDate">Tanggal Tiba</Label>
-        <Input
-          type="datetime-local"
-          placeholder="Tanggal Tiba..."
-          name="arrivalDate"
-          id="arrivalDate"
-          className="block"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="arrivalDate">Tanggal Tiba</Label>
+          <Input
+            type="datetime-local"
+            placeholder="Tanggal Tiba..."
+            name="arrivalDate"
+            id="arrivalDate"
+            className="block"
+            required
+          />
+        </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="destinationCityCode">Kode Kota</Label>
-        <Input
-          placeholder="Kode Kota..."
-          name="destinationCityCode"
-          id="destinationCityCode"
-          required
-        />
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="destinationCityCode">Kode Kota</Label>
+          <Input
+            placeholder="Kode Kota..."
+            name="destinationCityCode"
+            id="destinationCityCode"
+            required
+          />
+        </div>
       </div>
 
       <SubmitButtonForm />

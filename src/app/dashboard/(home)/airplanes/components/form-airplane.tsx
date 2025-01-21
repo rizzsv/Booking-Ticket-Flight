@@ -15,11 +15,6 @@ interface formAirplaneProps {
     defaultValues? : Airplane | null
  }
 
-const initialFormState: ActionResult = {
-    errorTitle: null,
-    errorDesc: []
-}
-
 const FormAirplane: FC<formAirplaneProps> = ({type, defaultValues}) => 
     {const updateAirplaneWithId = (_state: ActionResult, formData: FormData) => updateAirplane(null, defaultValues?.id!!, formData)
 

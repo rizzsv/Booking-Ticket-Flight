@@ -5,7 +5,6 @@ import FormAirplane from '../components/form-airplane';
 
 // }
 
-export const 
  
 const CreateAirplanePage: FC = () => {
     return (

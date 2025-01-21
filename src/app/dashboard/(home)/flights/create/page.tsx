@@ -9,10 +9,12 @@ import { getAirplanes } from "../../airplanes/lib/data";
 
 export const metadata : Metadata = {
     title: 'Dashboard | create data flight'
-}
+};
 
 const CreateFlightPage: FC = async () => {
     const airplanes = await getAirplanes()
+
+
 
     return (
         <div>
