@@ -7,7 +7,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { Pencil } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import DeleteAirplane from "./delete-tairplane"
+import DeleteAirplane from "./delete-airplane"
 
 export const columns : ColumnDef<Airplane>[] = [
     {
