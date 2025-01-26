@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import "../../globals.css";
+import Navbar from "../components/navbar";
+import CompanyLogos from "../components/company-logos";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,150 +21,63 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			{/* <body className={`${inter.className} text-white font-poppins bg-flysha-black`}>{children}</body> */}
-			<body className={`${inter.className}text-white font-poppins bg-flysha-black`}>
-  <section id="Signup" className="bg-[url('/assets/images/background/airplane.png')] bg-no-repeat bg-cover bg-left-top -z-10 min-h-screen">
-    <div className="Header-content bg-gradient-to-r from-[#080318] to-[rgba(8,3,24,0)] z=0 min-h-screen">
-        <nav id="Navbar" className="container max-w-[1130px] mx-auto flex justify-between items-center pt-[30px]"> 
-            <Link href="index.html" className="flex items-center shrink-0">
-                <Image width={120} height={60} src="/assets/images/logos/logo.svg" alt="logo" />
-            </Link>
-            <ul className="nav-menus flex gap-[30px] items-center w-fit">
-                <li>
-                    <Link href="" className="font-medium">Flash Sale</Link>
-                </li>
-                <li>
-                    <Link href="" className="font-medium">Discover</Link>
-                </li>
-                <li>
-                    <Link href="" className="font-medium">Packages</Link>
-                </li>
-                <li>
-                    <Link href="" className="font-medium">Stories</Link>
-                </li>
-                <li>
-                    <Link href="" className="font-medium">About</Link>
-                </li>
-                <Link href="signin.html" className="font-bold text-flysha-black bg-flysha-light-purple rounded-full p-[12px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#B88DFF]">Sign In</Link>
-            </ul>
-        </nav>
-        <div className="flex flex-col justify-between min-h-[calc(100vh-78px)]">
-            <div className="form-section container max-w-[1130px] w-full mx-auto flex flex-col gap-[30px] mt-[53px]">
-                <div className="title flex flex-col gap-1">
-                    <h1 className="font-bold text-[32px] leading-[48px]">Sign Up</h1>
-                    <p className="font-medium text-lg leading-[27px]">Enjoy new experience of flight</p>
-                </div>
-                <form className="bg-white text-flysha-black w-[500px] flex flex-col rounded-[20px] gap-5 p-5">
-                    <div className="flex gap-5">
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor ="name" className="font-medium">Complete Name</label>
-                            <input type="text" name="name" id="name" placeholder="Write your name" className="rounded-full h-6 w-full p-[12px_20px] h-[48px] bg-[#EDE8F5] appearance-none outline-none font-semibold focus:ring-2 focus:ring-flysha-light-purple" />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label htmlFor ="passport" className="font-medium">No. Passport</label>
-                            <input type="text" name="passport" id="passport" placeholder="Write passport number" className="rounded-full h-6 w-full p-[12px_20px] h-[48px] bg-[#EDE8F5] appearance-none outline-none font-semibold ring-2 ring-flysha-light-purple" />
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor ="email" className="font-medium">Email Address</label>
-                        <input type="email" name="email" id="email" placeholder="Write your email" className="rounded-full h-6 w-full p-[12px_20px] h-[48px] bg-[#EDE8F5] appearance-none outline-none font-semibold ring-2 ring-flysha-red" />
-                        <span className="error-messages font-medium text-xs text-flysha-red font-inter">Wrong format email address</span>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor ="password" className="font-medium">Email Address</label>
-                        <input type="password" name="password" id="password" placeholder="Type your password" className="rounded-full h-6 w-full p-[12px_20px] h-[48px] bg-[#EDE8F5] appearance-none outline-none font-semibold focus:ring-2 focus:ring-flysha-light-purple" />
-                         <span className="error-messages font-medium text-xs text-flysha-red font-inter">Wrong format email address</span>
-                    </div>
-                    <a href="signin.html" className="text-center text-flysha-black rounded-full bg-flysha-light-purple font-bold w-full p-[12px_30px] transition-all duration-300 hover:shadow-[0_10px_20px_0_#B88DFF]">Create New Account</a>
-                    <a href="signin.html" className="text-center text-flysha-black hover:text-white rounded-full bg-white hover:bg-flysha-black font-semibold w-full p-[12px_30px] border border-flysha-black transition-all duration-300">Sign In</a>
-                </form>
+			<body
+				className={`${inter.className} text-white font-poppins bg-flysha-black`}>
+				{children}
+
+				<section id="Header" className="bg-[url('/assets/images/background/airplane.png')] bg-no-repeat bg-cover bg-left-top -z-10">
+    <div className="Header-content bg-gradient-to-r from-[#080318] to-[rgba(8,3,24,0)] z=0">
+        <Navbar />
+        <div className="hero-section container max-w-[1130px] w-full mx-auto flex flex-col gap-[90px] mt-[103px]">
+            <div className="title flex flex-col gap-[30px]">
+                <h1 className="font-extrabold text-[80px] leading-[90px]">Best Flights. <br />Cheaper Budget.</h1>
+                <p className="font-medium text-lg leading-[36px]">No more long queue, get more delicious heavy meals. <br />Crafted by best talented people around the world.</p>
             </div>
-            <div className="company-logos w-full flex items-center py-[50px] bottom-0 overflow-hidden">
-                <div className="slider flex shrink-0 w-max">
-                    <div className="animate-[slide_10s_linear_infinite] flex gap-[50px] pl-[50px] items-center">
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
+            <form className="bg-white text-flysha-black w-full flex justify-between items-center rounded-[20px] p-5">
+                <div className="flex gap-[50px] items-center p-5">
+                    <div className="flex flex-col justify-center gap-[14px]">
+                        <label htmlFor="departure" className="text-lg">Departure</label>
+                        <div className="flex gap-[10px]">
+                            <div className="flex items-center w-8 h-8 shrink-0">
+                                <Image width={150} height={60} src="/assets/images/icons/airplane.svg" alt="icon" />
+                            </div>
+                            <select name="departure" id="departure" className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]">
+                                <option value="jkt" selected>Jakarta</option>
+                                <option value="sby">Surabaya</option>
+                            </select>
                         </div>
                     </div>
-                    <div className="animate-[slide_10s_linear_infinite] flex gap-[50px] pl-[50px] items-center">
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
+                    <hr className="border border-[#EDE8F5] h-[60px]" />
+                    <div className="flex flex-col justify-center gap-[14px]">
+                        <label htmlFor="arrival" className="text-lg">Arrival</label>
+                        <div className="flex gap-[10px]">
+                            <div className="flex items-center w-8 h-8 shrink-0">
+                                <Image width={150} height={60} src="/assets/images/icons/airplane.svg" alt="icon" />
+                            </div>
+                            <select name="arrival" id="arrival" className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]">
+                                <option value="shg" selected>Shanghai</option>
+                                <option value="bei">Beijing</option>
+                            </select>
                         </div>
                     </div>
-                    <div className="animate-[slide_10s_linear_infinite] flex gap-[50px] pl-[50px] items-center">
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum1.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum2.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum3.png" className="w-full h-full object-contain" alt="logo" />
-                        </div>
-                        <div className="flex w-fit h-[30px] shrink-0">
-                            <Image width={120} height={60} src="/assets/images/logos/logoipsum4.png" className="w-full h-full object-contain" alt="logo" />
+                    <hr className="border border-[#EDE8F5] h-[60px]" />
+                    <div className="flex flex-col justify-center gap-[14px]">
+                        <label htmlFor="date" className="text-lg">Departure Date</label>
+                        <div className="flex gap-[10px]">
+                            <div className="flex items-center w-8 h-8 shrink-0">
+                                <Image width={150} height={60} src="/assets/images/icons/calendar.svg" alt="icon" />
+                            </div>
+                            <input type="date" name="date" id="date" className="relative font-semibold text-[22px] leading-[26.63px] w-[157px] bg-transparent focus:outline-none appearance-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:opacity-0" />
                         </div>
                     </div>
                 </div>
-            </div>
+                <Link href="signup.html" className="font-bold text-2xl leading-9 text-flysha-black text-center bg-flysha-light-purple rounded-[18px] p-[12px_30px] flex shrink-0 items-center h-[108px]  transition-all duration-300 hover:shadow-[0_10px_20px_0_#B88DFF]">Explore Now</Link>
+            </form>
         </div>
+        <CompanyLogos />
     </div>
   </section>
-</body>
+			</body>
 		</html>
 	);
 }
