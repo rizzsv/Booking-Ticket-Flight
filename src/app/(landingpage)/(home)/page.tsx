@@ -4,9 +4,19 @@ import { getCityFilter } from "./lib/data";
 import CompanyLogos from "../components/company-logos";
 import Navbar from "../components/navbar";
 
-
 export default async function HomePage() {
-    const filter = await getCityFilter();
+    let filter;
+    try {
+        filter = await getCityFilter();
+        console.log("Filter data in component:", JSON.stringify(filter, null, 2));
+    } catch (error) {
+        console.error("Error fetching filter:", error);
+        filter = [];
+    }
+    
+    if (!filter || filter.length === 0) {
+        console.error("No filter data available");
+    }
 
     return (
         <>
@@ -58,14 +68,18 @@ export default async function HomePage() {
                                             <option value="" disabled selected>
                                                 Departure
                                             </option>
-                                            {filter?.map((val, key) => (
-                                                <option
-                                                    key={`${key} ${val.departureCity}`}
-                                                    value={val.departureCity}
-                                                >
-                                                    {val.departureCity}
-                                                </option>
-                                            ))}
+                                            {Array.isArray(filter) && filter.length > 0 ? (
+                                                filter.map((val, key) => (
+                                                    <option
+                                                        key={`departure-${key}-${val.departureCity}`}
+                                                        value={val.departureCity}
+                                                    >
+                                                        {val.departureCity}
+                                                    </option>
+                                                ))
+                                            ) : (
+                                                <option value="" disabled>No cities available</option>
+                                            )}
                                         </select>
                                     </div>
                                 </div>
@@ -163,7 +177,7 @@ export default async function HomePage() {
                                 Talented Crew
                             </p>
                             <p className="leading-[30px] text-flysha-off-purple">
-                                Our jets protected by metal that can’t be
+                                Our jets protected by metal that can't be
                                 destroyed.
                             </p>
                         </div>
@@ -182,7 +196,7 @@ export default async function HomePage() {
                                 Safe Guard
                             </p>
                             <p className="leading-[30px] text-flysha-off-purple">
-                                Our jets protected by metal that can’t be
+                                Our jets protected by metal that can't be
                                 destroyed.
                             </p>
                         </div>
@@ -201,7 +215,7 @@ export default async function HomePage() {
                                 Best Awards
                             </p>
                             <p className="leading-[30px] text-flysha-off-purple">
-                                Our jets protected by metal that can’t be
+                                Our jets protected by metal that can't be
                                 destroyed.
                             </p>
                         </div>
@@ -220,7 +234,7 @@ export default async function HomePage() {
                                 Pickup at Home
                             </p>
                             <p className="leading-[30px] text-flysha-off-purple">
-                                Our jets protected by metal that can’t be
+                                Our jets protected by metal that can't be
                                 destroyed.
                             </p>
                         </div>
@@ -700,191 +714,6 @@ export default async function HomePage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-flysha-bg-purple p-5 rounded-[20px] overflow-hidden">
-                                <p className="review leading-[30px] h-[90px] w-[305px]">
-                                    I thought cheaper was not good, well, I
-                                    personally never had this amazing
-                                    experience. Thank you!!
-                                </p>
-                                <div className="flex">
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                </div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
-                                        <Image
-                                            width={30}
-                                            height={30}
-                                            src="/assets/images/photos/Group 47.png"
-                                            className="w-full h-full object-cover"
-                                            alt="photo"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-[2px]">
-                                        <p className="font-bold">Jessi Lyio</p>
-                                        <p className="text-sm text-flysha-off-purple">
-                                            CPO Agolia Modd
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-flysha-bg-purple p-5 rounded-[20px] overflow-hidden">
-                                <p className="review leading-[30px] h-[90px] w-[305px]">
-                                    I thought cheaper was not good, well, I
-                                    personally never had this amazing
-                                    experience. Thank you!!
-                                </p>
-                                <div className="flex">
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                </div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
-                                        <Image
-                                            width={30}
-                                            height={30}
-                                            src="/assets/images/photos/Group 47.png"
-                                            className="w-full h-full object-cover"
-                                            alt="photo"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-[2px]">
-                                        <p className="font-bold">Jessi Lyio</p>
-                                        <p className="text-sm text-flysha-off-purple">
-                                            CPO Agolia Modd
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-flysha-bg-purple p-5 rounded-[20px] overflow-hidden">
-                                <p className="review leading-[30px] h-[90px] w-[305px]">
-                                    I thought cheaper was not good, well, I
-                                    personally never had this amazing
-                                    experience. Thank you!!
-                                </p>
-                                <div className="flex">
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                    <Image
-                                        width={30}
-                                        height={30}
-                                        src="/assets/images/icons/Star.svg"
-                                        className="w-5 h-5"
-                                        alt="star"
-                                    />
-                                </div>
-                                <div className="flex gap-4 items-center">
-                                    <div className="flex shrink-0 rounded-full w-[50px] h-[50px] overflow-hidden">
-                                        <Image
-                                            width={30}
-                                            height={30}
-                                            src="/assets/images/photos/Group 47.png"
-                                            className="w-full h-full object-cover"
-                                            alt="photo"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col gap-[2px]">
-                                        <p className="font-bold">Jessi Lyio</p>
-                                        <p className="text-sm text-flysha-off-purple">
-                                            CPO Agolia Modd
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="animate-[slide_15s_linear_infinite] flex gap-[30px] pl-[30px] items-center h-[228px]">
                             <div className="testi-cards flex flex-col gap-[14px] h-full w-fit bg-flysha-bg-purple p-5 rounded-[20px] overflow-hidden">
                                 <p className="review leading-[30px] h-[90px] w-[305px]">
                                     I thought cheaper was not good, well, I

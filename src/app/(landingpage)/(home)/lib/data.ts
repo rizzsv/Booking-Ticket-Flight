@@ -4,26 +4,26 @@ import prisma from "../../../../../lib/prisma";
 
 export const getCityFilter = async () => {
 	try {
-		const data = await prisma.flight.groupBy({
-			by: ["departureCity", "destinationCity"],
+		const data = await prisma.flight.findMany({
 			where: {
-				departureDate: {
-					gt: new Date(),
-				},
+			    departureDate: {
+					//ketika jadwal pesawat tidak ada di jam yang akan mendatang, maka tidak ada data yang akan ditampilkan
+			        gt: new Date(),
+			    },
 			},
-			_count: {
+			distinct: ['departureCity'],  
+			select: {
 				departureCity: true,
 				destinationCity: true,
-			},
+			}
 		});
 
+		console.log("Query result:", data);
 		return data;
-        console.log(data);
-        
-        
+		
 	} catch (error) {
-		console.log(error);
-		return [];
+		console.error("Error in getCityFilter:", error);
+		throw error; 
 	}
 };
 
@@ -33,16 +33,15 @@ export const getAirplanes = async () => {
 			where: {
 				flight: {
 					every: {
-						id: undefined
-					}
-				}
-			}
-		})
+						id: undefined,
+					},
+				},
+			},
+		});
 
-		return data
+		return data;
 	} catch (error) {
 		console.log(error);
-		
-		return []
+		return [];
 	}
-}
+};
