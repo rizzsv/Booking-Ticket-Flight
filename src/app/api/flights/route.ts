@@ -2,21 +2,13 @@ import type { NextRequest } from "next/server";
 import prisma from "../../../../lib/prisma";
 import type { TypeSeat } from "@prisma/client";
 
-export async function GET(request: NextRequest) {
-    const searchparams = request.nextUrl.searchParams
-
-    const params = {
-        departure: searchparams.get('departure'),
-        arrival: searchparams.get('arrival'),
-        date: searchparams.get('date'),
-        planeId: searchparams.get('planeId'),
-        seat: searchparams.get('seat'),
-    }
+export async function POST(request: NextRequest) {
+    const body = await request.json()
 
     let departureDate : Date | null = null
 
-    if(params.date){
-        departureDate = new Date(params.date)
+    if(body.date){
+        departureDate = new Date(body.date)
         departureDate.setHours(1)
     }
 
@@ -29,20 +21,20 @@ export async function GET(request: NextRequest) {
     try {
         const data = await prisma.flight.findMany({
             where: {
-                departureCity: params.departure !== null ?params.departure : {},
-                destinationCity: params.arrival !== null ?params.arrival : {},
-                seats: params.seat !== null ? {
+                departureCity: body.departure !== null ?body.departure : {},
+                destinationCity: body.arrival !== null ?body.arrival : {},
+                seats: body.seat !== null ? {
                     some: {
-                        type: params.seat as TypeSeat,
+                        type: body.seat as TypeSeat,
                         isBooked: false
                     }
                 } : {},
                 departureDate: departureDate !== null ? {
                     gte: departureDate
                 } : {},
-                planeId: params.planeId ? params.planeId.split(',').length > 0 ? {
-                    in: [...params.planeId.split(',')]
-                } : {} : {},
+                planeId: body.planeIds.length > 0 ? {
+                    in: body.planeIds
+                } : {}
             },
             include : {
                 plane: true
