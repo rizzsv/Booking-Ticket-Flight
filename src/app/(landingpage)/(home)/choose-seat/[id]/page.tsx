@@ -2,8 +2,25 @@
 import React from 'react'
 import SeatList from './components/seat-list'
 import FlightDetail from './components/flight-detail'
+import { getFlightById } from '../../lib/data';
+import { getUser } from '@/lib/auth';
 
-export default function ChooseSeatPage() {
+
+type Params = {
+    id: string;
+}
+
+interface ChooseSeatProps {
+    params: Params;
+}
+
+export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
+
+    const {session} = await getUser()
+    const flight = await getFlightById(params.id)
+    console.log(flight);
+    
+    
   return (
     <section id="Chosse-Seat" className="container flex flex-col sm:flex-row items-center sm:items-start justify-between sm:w-[904px] pt-10 mx-auto sm:pb-0 min-h-screen">
     <div className="flex h-[calc(100vh-40px)] items-end">
@@ -30,11 +47,11 @@ export default function ChooseSeatPage() {
                         <span className="font-semibold">Available</span>
                     </div>
                 </div>
-                <SeatList />
+                {flight?.seats && <SeatList seats={flight.seats} />}
             </div>
         </div>
     </div>
-    <FlightDetail />
+    {flight && <FlightDetail flight={flight} session={session} />}
   </section>
   )
 }

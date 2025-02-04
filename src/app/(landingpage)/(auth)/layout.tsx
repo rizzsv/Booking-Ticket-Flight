@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <section
           id="Signup"
-          className="bg-[url('/assets/images/background/airplane.png')] bg-no-repeat bg-cover bg-left-top -z-10 min-h-screen"
+          className="bg-[url('/assets/images/background/FLIGHT3.jpg')] bg-no-repeat bg-cover bg-left-top -z-10 min-h-screen"
         >
           <div className="Header-content bg-gradient-to-r from-[#080318] to-[rgba(8,3,24,0)] z=0 min-h-screen">
             {/* For Navbar */}

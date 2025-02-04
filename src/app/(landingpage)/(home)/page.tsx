@@ -23,205 +23,157 @@ export default async function HomePage() {
     <>
       <section
         id="Header"
-        className="bg-[url('/assets/images/background/airplane.png')] bg-no-repeat bg-cover bg-left-top -z-10"
+        className="min-h-screen bg-[url('/assets/images/background/FLIGHT3.jpg')] bg-no-repeat bg-cover bg-center relative"
       >
-        <div className="Header-content bg-gradient-to-r from-[#080318] to-[rgba(8,3,24,0)] z=0">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080318]/80 to-transparent">
           <Navbar />
-          <div className="hero-section container max-w-[1130px] w-full mx-auto flex flex-col gap-[90px] mt-[103px]">
-            <div className="title flex flex-col gap-[30px]">
-              <h1 className="font-extrabold text-[80px] leading-[90px]">
-                Best Flights. <br />
-                Cheaper Budget.
+          <div className="container max-w-[1130px] mx-auto pt-[120px]">
+            <div className="max-w-2xl">
+              <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
+                Discover Your <span className="text-flysha-light-purple">Dream</span> Destination
               </h1>
-              <p className="font-medium text-lg leading-[36px]">
-                No more long queue, get more delicious heavy meals. <br />
-                Crafted by best talented people around the world.
+              <p className="text-lg text-gray-300 mb-12">
+                Find and book your perfect flight with ease. Best prices guaranteed with premium service.
               </p>
-            </div>
-            <form
-              action={searchFlight}
-              className="bg-white text-flysha-black w-full flex justify-between items-center rounded-[20px] p-5"
-            >
-              <div className="flex gap-[50px] items-center p-5">
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="departure" className="text-lg">
-                    Departure
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <Image
-                        width={150}
-                        height={60}
-                        src="/assets/images/icons/airplane.svg"
-                        alt="icon"
-                      />
-                    </div>
+              
+              <form
+                action={searchFlight}
+                className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl"
+              >
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">From</label>
                     <select
                       name="departure"
-                      id="departure"
-                      className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]"
+                      className="w-full bg-white/20 rounded-lg px-4 py-3 appearance-none"
                     >
-                      <option value="" disabled selected>
-                        Departure
-                      </option>
-                      {Array.isArray(filter) && filter.length > 0 ? (
-                        filter.map((val, key) => (
-                          <option
-                            key={`departure-${key}-${val.departureCity}`}
-                            value={val.departureCity}
-                          >
-                            {val.departureCity}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="" disabled>
-                          No cities available
+                      <option value="" disabled selected className="text-white">Select City</option>
+                      {Array.isArray(filter) && filter.map((val, key) => (
+                        <option className="text-black" key={key} value={val.departureCity}>
+                          {val.departureCity}
                         </option>
-                      )}
+                      ))}
                     </select>
                   </div>
-                </div>
-                <hr className="border border-[#EDE8F5] h-[60px]" />
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="arrival" className="text-lg">
-                    Arrival
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <Image
-                        width={150}
-                        height={60}
-                        src="/assets/images/icons/airplane.svg"
-                        alt="icon"
-                      />
-                    </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">To</label>
                     <select
                       name="arrival"
-                      id="arrival"
-                      className="font-semibold text-[22px] leading-[26.63px] appearance-none bg-[url(/assets/images/icons/arrow-down.svg)] bg-no-repeat bg-[right_1px] pr-[30px]"
+                      className="w-full bg-white/20 rounded-lg px-4 py-3 text-white appearance-none"
                     >
-                      <option value="" disabled selected>
+                      <option value="" disabled selected className="text-white">
                         Arrival
                       </option>
                       {filter?.map((val, key) => (
                         <option
                           key={`${key} ${val.destinationCity}`}
                           value={val.destinationCity}
+                          className="text-black"
                         >
                           {val.destinationCity}
                         </option>
                       ))}
                     </select>
                   </div>
-                </div>
-                <hr className="border border-[#EDE8F5] h-[60px]" />
-                <div className="flex flex-col justify-center gap-[14px]">
-                  <label htmlFor="date" className="text-lg">
-                    Departure Date
-                  </label>
-                  <div className="flex gap-[10px]">
-                    <div className="flex items-center w-8 h-8 shrink-0">
-                      <Image
-                        width={150}
-                        height={60}
-                        src="/assets/images/icons/calendar.svg"
-                        alt="icon"
-                      />
-                    </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">When</label>
                     <input
                       type="date"
                       name="date"
-                      id="date"
-                      className="relative font-semibold text-[22px] leading-[26.63px] w-[157px] bg-transparent focus:outline-none appearance-none [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:opacity-0"
+                      className="w-full bg-white/20 rounded-lg px-4 py-3 text-white"
                     />
                   </div>
                 </div>
-              </div>
-              <button
-                type="submit"
-                className="font-bold text-2xl leading-9 text-flysha-black text-center bg-flysha-light-purple rounded-[18px] p-[12px_30px] flex shrink-0 items-center h-[108px]  transition-all duration-300 hover:shadow-[0_10px_20px_0_#B88DFF]"
-              >
-                Explore Now
-              </button>
-            </form>
+                
+                <button
+                  type="submit"
+                  className="w-full mt-6 bg-flysha-light-purple text-white py-4 rounded-lg font-medium hover:bg-opacity-90 transition-all"
+                >
+                  Search Flights
+                </button>
+              </form>
+            </div>
           </div>
-          <CompanyLogos />
         </div>
       </section>
 
       <section
         id="Services"
-        className="container max-w-[1130px] mx-auto flex flex-col pt-[100px] gap-[30px]"
+        className="py-24 bg-flysha-bg-purple"
       >
-        <h2 className="font-bold text-[32px] leading-[48px] text-center">
-          We Ensure You <br />
-          Fly With Us Forever
-        </h2>
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
-              <Image
-                width={35}
-                height={35}
-                src="/assets/images/icons/profile-2user.svg"
-                alt="icon"
-              />
+        <div className="container max-w-[1130px] mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Why Choose <span className="text-flysha-light-purple">Flysha?</span>
+          </h2>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="flex flex-col gap-[30px] w-[220px]">
+              <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
+                <Image
+                  width={35}
+                  height={35}
+                  src="/assets/images/icons/profile-2user.svg"
+                  alt="icon"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="font-bold text-2xl leading-[36px]">Talented Crew</p>
+                <p className="leading-[30px] text-flysha-off-purple">
+                  Our jets protected by metal that can't be destroyed.
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">Talented Crew</p>
-              <p className="leading-[30px] text-flysha-off-purple">
-                Our jets protected by metal that can't be destroyed.
-              </p>
+            <div className="flex flex-col gap-[30px] w-[220px]">
+              <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
+                <Image
+                  width={35}
+                  height={35}
+                  src="/assets/images/icons/shield-tick.svg"
+                  alt="icon"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="font-bold text-2xl leading-[36px]">Safe Guard</p>
+                <p className="leading-[30px] text-flysha-off-purple">
+                  Our jets protected by metal that can't be destroyed.
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
-              <Image
-                width={35}
-                height={35}
-                src="/assets/images/icons/shield-tick.svg"
-                alt="icon"
-              />
+            <div className="flex flex-col gap-[30px] w-[220px]">
+              <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
+                <Image
+                  width={35}
+                  height={35}
+                  src="/assets/images/icons/crown.svg"
+                  alt="icon"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="font-bold text-2xl leading-[36px]">Best Awards</p>
+                <p className="leading-[30px] text-flysha-off-purple">
+                  Our jets protected by metal that can't be destroyed.
+                </p>
+              </div>
             </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">Safe Guard</p>
-              <p className="leading-[30px] text-flysha-off-purple">
-                Our jets protected by metal that can't be destroyed.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
-              <Image
-                width={35}
-                height={35}
-                src="/assets/images/icons/crown.svg"
-                alt="icon"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">Best Awards</p>
-              <p className="leading-[30px] text-flysha-off-purple">
-                Our jets protected by metal that can't be destroyed.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-[30px] w-[220px]">
-            <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
-              <Image
-                width={35}
-                height={35}
-                src="/assets/images/icons/building-3.svg"
-                alt="icon"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <p className="font-bold text-2xl leading-[36px]">
-                Pickup at Home
-              </p>
-              <p className="leading-[30px] text-flysha-off-purple">
-                Our jets protected by metal that can't be destroyed.
-              </p>
+            <div className="flex flex-col gap-[30px] w-[220px]">
+              <div className="flex shrink-0 w-[70px] h-[70px] rounded-full items-center justify-center bg-flysha-light-purple">
+                <Image
+                  width={35}
+                  height={35}
+                  src="/assets/images/icons/building-3.svg"
+                  alt="icon"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="font-bold text-2xl leading-[36px]">
+                  Pickup at Home
+                </p>
+                <p className="leading-[30px] text-flysha-off-purple">
+                  Our jets protected by metal that can't be destroyed.
+                </p>
+              </div>
             </div>
           </div>
         </div>

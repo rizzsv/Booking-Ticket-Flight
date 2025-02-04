@@ -45,3 +45,34 @@ export const getAirplanes = async () => {
 		return [];
 	}
 };
+
+export const getFlightById = async (id: string) => {
+	try {
+		console.log("Searching for flight with ID:", id);
+		
+		const data = await prisma.flight.findFirst({
+			where: {
+				id: id,
+			},
+			include: {
+				seats: {
+					orderBy: {
+						seatNumber: "asc",
+					},
+				},
+				plane: true,
+			},
+		});
+		
+		console.log("Database response:", data);
+		
+		if (!data) {
+			console.log("No flight found with ID:", id);
+		}
+
+		return data;
+	} catch (error) {
+		console.error("Error in getFlightById:", error);
+		return null;
+	}
+};

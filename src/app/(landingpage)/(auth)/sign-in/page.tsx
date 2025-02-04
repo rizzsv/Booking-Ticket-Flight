@@ -3,12 +3,14 @@ import FormSignin from './components/form-signin'
 
 export default function SignPage() {
   return (
-    <div className="form-section container max-w-[1130px] w-full mx-auto flex flex-col gap-[30px] mt-[53px]">
-      <div className="title flex flex-col gap-1">
-        <h1 className="font-bold text-[32px] leading-[48px]">Sign In</h1>
-        <p className="font-medium text-lg leading-[27px]">Enjoy new experience of flight</p>
+    <div className="min-h-screen flex items-center justify-center from-flysha-light-purple to-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Welcome Back</h1>
+          <p className="text-lg text-gray-600">Sign in to continue your journey</p>
+        </div>
+        <FormSignin />
       </div>
-      <FormSignin />
     </div>
   )
 }
