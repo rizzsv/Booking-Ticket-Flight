@@ -23,7 +23,7 @@ export const SEAT_VALUES = {
   },
   FIRST: {
     label: "First",
-    additionalPrice: 750000
+    additionalPrice: 75000
   }
 }
 
