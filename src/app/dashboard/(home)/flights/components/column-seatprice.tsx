@@ -60,7 +60,7 @@ const ColumnSeatPrice: FC<ColumnSeatPriceProps> = ({ flight }) => {
           <div className="space-y-2">
             <div className="font-medium">
                 <span className="text-primary">Harga tiket:</span>{" "}
-                {rupiahFormat(flight.price  + 7500000)}
+                {rupiahFormat(flight.price  + 750000)}
             </div>
             <div className="font-medium">
                 <span className="text-primary">Sisa Kursi: </span> {" "} {first}/{totalSeatFirst}

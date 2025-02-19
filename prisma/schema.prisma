@@ -31,9 +31,9 @@ enum StatusTicket {
 }
 
 model User {
-  id       String   @id @default(cuid())
+  id       String    @id @default(cuid())
   name     String
-  email    String   @unique
+  email    String    @unique
   password String
   passport String?
   role     RoleUser
@@ -84,8 +84,8 @@ model FlightSeat {
 model Ticket {
   id            String       @id @default(cuid())
   code          String       @unique
-  flightid      String
-  flight        Flight       @relation(fields: [flightid], references: [id])
+  flightId      String
+  flight        Flight       @relation(fields: [flightId], references: [id])
   customerId    String
   customer      User         @relation(fields: [customerId], references: [id])
   seatId        String       @unique
